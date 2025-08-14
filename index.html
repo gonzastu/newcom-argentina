@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>NuCon Argentina | Torneos de Newcom</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin:0; padding:0; background:#f8f8f8; }
+    header, footer { background:#003366; color:#fff; padding:20px; text-align:center; }
+    nav a { color:#fff; margin:0 15px; text-decoration:none; font-weight:bold; }
+    .banner { background:#66ccff; padding:60px; text-align:center; color:#003366; }
+    .container { padding:20px; max-width:900px; margin:auto; }
+    .torneo { background:#fff; border:1px solid #ddd; margin-bottom:15px; padding:15px; border-radius:10px; }
+    .torneo h3 { margin:0 0 5px 0; }
+    form input, form select, form textarea { width:100%; padding:8px; margin:5px 0; border:1px solid #ccc; border-radius:5px; }
+    form button { padding:10px 20px; background:#003366; color:#fff; border:none; cursor:pointer; border-radius:5px; }
+    form button:hover { background:#002244; }
+  </style>
+</head>
+<body>
+  <header>
+    <!-- Logo en SVG -->
+    <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 200 200">
+      <circle cx="100" cy="100" r="90" fill="#003366"/>
+      <circle cx="100" cy="100" r="50" fill="#ffffff" stroke="#003366" stroke-width="5"/>
+      <path d="M50,100 A50,50 0 0,1 150,100" fill="none" stroke="#66ccff" stroke-width="4"/>
+      <path d="M100,50 A50,50 0 0,1 100,150" fill="none" stroke="#66ccff" stroke-width="4"/>
+      <path d="M100,20 C130,40 140,70 100,90" fill="none" stroke="#ffcc00" stroke-width="6" stroke-linecap="round"/>
+    </svg>
+    <nav>
+      <a href="#inicio">Inicio</a>
+      <a href="#torneos">Torneos</a>
+      <a href="#cargar">Cargar torneo</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </header>
+
+  <section class="banner" id="inicio">
+    <h1>Bienvenidos a NuCon Argentina</h1>
+    <p>Torneos y encuentros de Newcom en todo el país</p>
+  </section>
+
+  <section class="container" id="torneos">
+    <h2>Próximos Torneos</h2>
+    <div id="listaTorneos"></div>
+  </section>
+
+  <section class="container" id="cargar">
+    <h2>Cargar nuevo torneo</h2>
+    <form id="formTorneo">
+      <input type="text" id="nombre" placeholder="Nombre del torneo" required>
+      <input type="text" id="lugar" placeholder="Ciudad, Provincia" required>
+      <input type="date" id="fechaInicio" required>
+      <input type="date" id="fechaFin" required>
+      <select id="categoria">
+        <option value="+40">+40</option>
+        <option value="+50">+50</option>
+        <option value="+60">+60</option>
+        <option value="+70">+70</option>
+      </select>
+      <textarea id="descripcion" placeholder="Descripción"></textarea>
+      <input type="email" id="contacto" placeholder="Email de contacto">
+      <button type="submit">Enviar</button>
+    </form>
+    <div id="mensaje"></div>
+  </section>
+
+  <footer id="contacto">
+    <p>Contacto: contacto@nucon.org.ar</p>
+    <p>© 2025 NuCon Argentina</p>
+  </footer>
+
+  <script>
+    const torneos = [
+      { nombre:"Campeonato Argentino de Newcom", lugar:"Nodo Tecnológico, Santiago del Estero", fechaInicio:"2025-06-12", fechaFin:"2025-06-15", categoria:"+50", descripcion:"64 equipos de todo el país", contacto:"organizacion@newcom.ar" },
+      { nombre:"6° Torneo Nacional San Rafael", lugar:"San Rafael, Mendoza", fechaInicio:"2025-11-29", fechaFin:"2025-12-01", categoria:"+60", descripcion:"Competencia nacional con más de 40 equipos", contacto:"info@sanrafaelnewcom.ar" }
+    ];
+
+    function mostrarTorneos() {
+      const cont = document.getElementById('listaTorneos');
+      cont.innerHTML = '';
+      torneos.forEach(t => {
+        cont.innerHTML += `
+          <div class="torneo">
+            <h3>${t.nombre} (${t.categoria})</h3>
+            <p><b>Lugar:</b> ${t.lugar}</p>
+            <p><b>Fecha:</b> ${t.fechaInicio} → ${t.fechaFin}</p>
+            <p>${t.descripcion}</p>
+            <p><b>Contacto:</b> ${t.contacto}</p>
+          </div>`;
+      });
+    }
+
+    document.getElementById('formTorneo').addEventListener('submit', e => {
+      e.preventDefault();
+      const t = {
+        nombre: document.getElementById('nombre').value,
+        lugar: document.getElementById('lugar').value,
+        fechaInicio: document.getElementById('fechaInicio').value,
+        fechaFin: document.getElementById('fechaFin').value,
+        categoria: document.getElementById('categoria').value,
+        descripcion: document.getElementById('descripcion').value,
+        contacto: document.getElementById('contacto').value
+      };
+      torneos.push(t);
+      mostrarTorneos();
+      document.getElementById('mensaje').textContent = '✅ Torneo cargado con éxito!';
+      e.target.reset();
+    });
+
+    mostrarTorneos();
+  </script>
+</body>
+</html>
