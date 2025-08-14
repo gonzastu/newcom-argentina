@@ -1,0 +1,50 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f8f9fa;
+}
+header {
+    background: #0077b6;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+header .logo {
+    width: 80px;
+}
+nav a {
+    margin: 0 10px;
+    color: white;
+    text-decoration: none;
+}
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    padding: 10px;
+}
+.card {
+    background: #90e0ef;
+    padding: 20px;
+    text-align: center;
+    border-radius: 8px;
+    font-weight: bold;
+}
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 300px;
+    margin: auto;
+}
+#listaTorneos {
+    padding: 10px;
+}
+.torneo {
+    background: white;
+    margin: 5px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
